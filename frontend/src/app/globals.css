@@ -137,20 +137,32 @@ a {
 }
 
 .profile-circle {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
+  border: 2px solid var(--surface);
   border-radius: 50%;
   background: var(--accent);
-  color: white;
-  font-size: 15px;
-  font-weight: 700;
-  transition: transform 0.2s ease;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 0 0 1px var(--accent-dark);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .profile-circle:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 0 2px var(--accent-dark);
+}
+
+.dark .profile-circle {
+  border-color: var(--surface);
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 0 0 1px var(--accent-dark);
 }
 
 .theme-button {
@@ -1056,7 +1068,11 @@ a {
 .admin-user {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  padding: 8px 12px 8px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
 }
 
 .admin-user strong,
