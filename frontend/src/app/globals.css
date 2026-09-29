@@ -1631,3 +1631,22 @@ a {
     padding: 26px 20px;
   }
 }
+
+.header-account-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 700px) {
+  .header-account-actions {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 14px;
+    margin-top: 4px;
+  }
+
+  .header-account-actions .profile-trigger {
+    margin-left: 2px;
+  }
+}

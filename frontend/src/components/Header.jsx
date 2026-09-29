@@ -7,7 +7,6 @@ import { useGetCartQuery } from "@/store/api/api";
 
 export default function Header({ onLogin, onProfile, onCart }) {
     const [menuOpen, setMenuOpen] = useState(false);
-
     const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
@@ -22,7 +21,11 @@ export default function Header({ onLogin, onProfile, onCart }) {
         setDarkMode((current) => {
             const nextMode = !current;
 
-            document.documentElement.classList.toggle("dark", nextMode);
+            document.documentElement.classList.toggle(
+                "dark",
+                nextMode
+            );
+
             localStorage.setItem(
                 "shopin-theme",
                 nextMode ? "dark" : "light"
@@ -31,20 +34,26 @@ export default function Header({ onLogin, onProfile, onCart }) {
             return nextMode;
         });
     };
-    const { isAuthenticated, user } = useSelector((state) => state.auth);
+
+    const { isAuthenticated, user } = useSelector(
+        (state) => state.auth
+    );
 
     const { data: cartData } = useGetCartQuery(undefined, {
         skip: !isAuthenticated,
     });
 
     const cartItems = cartData?.data?.items || [];
+
     const cartCount = cartItems.reduce(
         (total, item) => total + item.quantity,
         0
     );
 
     const closeMenu = () => setMenuOpen(false);
-    const profileInitial = user?.firstName?.charAt(0)?.toUpperCase() || "U";
+
+    const profileInitial =
+        user?.firstName?.charAt(0)?.toUpperCase() || "U";
 
     return (
         <header className="site-header">
@@ -53,8 +62,14 @@ export default function Header({ onLogin, onProfile, onCart }) {
                     ShopIn.
                 </Link>
 
-                <nav className={`nav ${menuOpen ? "nav-open" : ""}`}>
-                    <Link href="/" onClick={closeMenu}>Home</Link>
+                <nav
+                    className={`nav ${
+                        menuOpen ? "nav-open" : ""
+                    }`}
+                >
+                    <Link href="/" onClick={closeMenu}>
+                        Home
+                    </Link>
 
                     <a href="#products" onClick={closeMenu}>
                         Products
@@ -72,33 +87,45 @@ export default function Header({ onLogin, onProfile, onCart }) {
                         </Link>
                     )}
 
-                    <button
-                        type="button"
-                        className="theme-button"
-                        onClick={() => {
-                            toggleDarkMode();
-                            closeMenu();
-                        }}
-                        aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-                    >
-                        {darkMode ? "☀ Light" : "☾ Dark"}
-                    </button>
+                    <div className="header-account-actions">
+                        <button
+                            type="button"
+                            className="theme-button"
+                            onClick={() => {
+                                toggleDarkMode();
+                                closeMenu();
+                            }}
+                            aria-label={
+                                darkMode
+                                    ? "Switch to light mode"
+                                    : "Switch to dark mode"
+                            }
+                        >
+                            {darkMode ? "☀ Light" : "☾ Dark"}
+                        </button>
 
-                    <button
-                        type="button"
-                        className={isAuthenticated ? "profile-trigger" : ""}
-                        onClick={() => {
-                            onProfile();
-                            closeMenu();
-                        }}
-                        aria-label="Open profile"
-                    >
-                        {isAuthenticated ? (
-                            <span className="profile-circle">{profileInitial}</span>
-                        ) : (
-                            "Profile"
-                        )}
-                    </button>
+                        <button
+                            type="button"
+                            className={
+                                isAuthenticated
+                                    ? "profile-trigger"
+                                    : ""
+                            }
+                            onClick={() => {
+                                onProfile();
+                                closeMenu();
+                            }}
+                            aria-label="Open profile"
+                        >
+                            {isAuthenticated ? (
+                                <span className="profile-circle">
+                                    {profileInitial}
+                                </span>
+                            ) : (
+                                "Profile"
+                            )}
+                        </button>
+                    </div>
 
                     <button
                         type="button"
@@ -109,8 +136,11 @@ export default function Header({ onLogin, onProfile, onCart }) {
                         }}
                     >
                         <span>Cart</span>
+
                         {cartCount > 0 && (
-                            <span className="cart-badge">{cartCount}</span>
+                            <span className="cart-badge">
+                                {cartCount}
+                            </span>
                         )}
                     </button>
                 </nav>
@@ -118,7 +148,9 @@ export default function Header({ onLogin, onProfile, onCart }) {
                 <button
                     type="button"
                     className="menu-button"
-                    onClick={() => setMenuOpen((open) => !open)}
+                    onClick={() =>
+                        setMenuOpen((open) => !open)
+                    }
                     aria-label="Toggle menu"
                 >
                     ☰
