@@ -9,13 +9,17 @@ export default function Header({ onLogin, onProfile, onCart }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const [darkMode, setDarkMode] = useState(false);
 
-    useEffect(() => {
-        const savedTheme = localStorage.getItem("shopin-theme");
-        const isDark = savedTheme === "dark";
+    const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window === "undefined") {
+        return false;
+    }
 
-        setDarkMode(isDark);
-        document.documentElement.classList.toggle("dark", isDark);
-    }, []);
+    return localStorage.getItem("shopin-theme") === "dark";
+});
+
+useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+}, [darkMode]);
 
     const toggleDarkMode = () => {
         setDarkMode((current) => {
