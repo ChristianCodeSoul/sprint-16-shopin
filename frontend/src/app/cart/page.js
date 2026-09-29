@@ -124,13 +124,8 @@ export default function CartPage() {
                         <p className="section-label">
                             CART
                         </p>
-
                         <h1>Login required</h1>
-
-                        <p>
-                            Please login to view your cart.
-                        </p>
-
+                        <p>Please login to view your cart.</p>
                         <button
                             type="button"
                             onClick={() =>
@@ -157,25 +152,16 @@ export default function CartPage() {
                     <p className="section-label">
                         CART
                     </p>
-
                     <h1>Your Shopping Cart</h1>
-
-                    <p>
-                        Review your items and place your
-                        order.
-                    </p>
+                    <p>Review your items and place your order.</p>
                 </section>
 
                 {isLoading && (
-                    <div className="cart-status">
-                        Loading your cart...
-                    </div>
+                    <div className="cart-status">Loading your cart...</div>
                 )}
 
                 {isError && (
-                    <div className="cart-status error">
-                        Unable to load your cart.
-                    </div>
+                    <div className="cart-status error">Unable to load your cart.</div>
                 )}
 
                 {!isLoading &&
@@ -183,12 +169,7 @@ export default function CartPage() {
                     cartItems.length === 0 && (
                         <div className="cart-empty">
                             <h2>Your cart is empty</h2>
-
-                            <p>
-                                Add some products from the
-                                shop to get started.
-                            </p>
-
+                            <p>Add some products from the shop to get started.</p>
                             <button
                                 type="button"
                                 onClick={() =>
@@ -223,40 +204,28 @@ export default function CartPage() {
                                             <div className="cart-item-image">
                                                 {product.image ? (
                                                     <Image
-                                                        src={
-                                                            product.image
-                                                        }
-                                                        alt={
-                                                            product.title
-                                                        }
+                                                        src={product.image}
+                                                        alt={product.title}
                                                         width={500}
                                                         height={500}
                                                     />
                                                 ) : (
-                                                    <span>
-                                                        No image
-                                                    </span>
+                                                    <span>No image</span>
                                                 )}
                                             </div>
 
                                             <div className="cart-item-info">
                                                 <span className="product-category">
-                                                    {
-                                                        product.category
-                                                    }
+                                                    {product.category}
                                                 </span>
 
                                                 <h3>
-                                                    {
-                                                        product.title
-                                                    }
+                                                    {product.title}
                                                 </h3>
 
                                                 <strong>
                                                     ₹
-                                                    {
-                                                        product.price
-                                                    }
+                                                    {product.price}
                                                 </strong>
 
                                                 <div className="cart-item-actions">
