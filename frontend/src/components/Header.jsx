@@ -7,29 +7,23 @@ import { useGetCartQuery } from "@/store/api/api";
 
 export default function Header({ onLogin, onProfile, onCart }) {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [darkMode, setDarkMode] = useState(false);
-
     const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window === "undefined") {
-        return false;
-    }
+        if (typeof window === "undefined") {
+            return false;
+        }
 
-    return localStorage.getItem("shopin-theme") === "dark";
-});
+        return localStorage.getItem("shopin-theme") === "dark";
+    });
 
-useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-}, [darkMode]);
+    useEffect(() => {
+        document.documentElement.classList.toggle("dark", darkMode);
+    }, [darkMode]);
 
     const toggleDarkMode = () => {
         setDarkMode((current) => {
             const nextMode = !current;
 
-            document.documentElement.classList.toggle(
-                "dark",
-                nextMode
-            );
-
+            document.documentElement.classList.toggle("dark", nextMode);
             localStorage.setItem(
                 "shopin-theme",
                 nextMode ? "dark" : "light"
@@ -48,7 +42,6 @@ useEffect(() => {
     });
 
     const cartItems = cartData?.data?.items || [];
-
     const cartCount = cartItems.reduce(
         (total, item) => total + item.quantity,
         0
@@ -66,11 +59,7 @@ useEffect(() => {
                     ShopIn.
                 </Link>
 
-                <nav
-                    className={`nav ${
-                        menuOpen ? "nav-open" : ""
-                    }`}
-                >
+                <nav className={`nav ${menuOpen ? "nav-open" : ""}`}>
                     <Link href="/" onClick={closeMenu}>
                         Home
                     </Link>
@@ -152,9 +141,7 @@ useEffect(() => {
                 <button
                     type="button"
                     className="menu-button"
-                    onClick={() =>
-                        setMenuOpen((open) => !open)
-                    }
+                    onClick={() => setMenuOpen((open) => !open)}
                     aria-label="Toggle menu"
                 >
                     ☰
